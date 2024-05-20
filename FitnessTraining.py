@@ -9,6 +9,7 @@ goals = st.text_input("What are your fitness goals?")
 fitness_level = st.selectbox("What is your current fitness level?", ["Beginner", "Intermediate", "Advanced"])
 duration = st.slider("Duration of the training plan (in weeks)", 4, 8, 12)
 generate_button = st.button("Generate plan")
+openai_api_key = st.sidebar.text_input('OpenAI API Key', type='password')
 
 if not openai_api_key.startswith('sk-'):
    st.warning('Please enter your OpenAI API key!', icon='⚠')
