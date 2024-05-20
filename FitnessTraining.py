@@ -9,6 +9,7 @@ goals = st.text_input("What are your fitness goals?")
 fitness_level = st.selectbox("What is your current fitness level?", ["Beginner", "Intermediate", "Advanced"])
 duration = st.slider("Duration of the training plan (in weeks)", 4, 8, 12)
 generate_button = st.button("Generate plan")
+concatenated_content=""
 
 if not openai_api_key.startswith('sk-'):
    st.warning('Please enter your OpenAI API key!', icon='⚠')
@@ -19,7 +20,9 @@ if generate_button and openai_api_key.startswith('sk-'):
                    f"Can you provide me with a detailed weekly fitness training plan?")
       st.write(prompt)
       response = llm.stream(prompt)
-      st.header("Your Fitness Plan")
-      st.text(response)
+      for chunk in response:
+          content_without_timestamps = ''.join(filter(lambda x: not x.isdigit(), chunk.content))
+          concatenated_content += content_without_timestamps
+      st.write(f"{concatenated_content}")
    else:
       st.error("Please provide all the required information.")
