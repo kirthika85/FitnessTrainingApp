@@ -23,6 +23,6 @@ if generate_button and openai_api_key.startswith('sk-'):
       for chunk in response:
           #content_without_timestamps = ''.join(filter(lambda x: not x.isdigit(), chunk.content))
           #concatenated_content += content_without_timestamps
-      st.write(f"{chunk.content}")
+          st.write(f"{chunk.content}")
    else:
       st.error("Please provide all the required information.")
