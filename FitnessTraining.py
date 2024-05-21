@@ -20,7 +20,8 @@ if generate_button and openai_api_key.startswith('sk-'):
                    f"Can you provide me with a detailed weekly fitness training plan?")
       st.write(prompt)
       response = llm.stream(prompt)
-      print(type(response))
-      st.write(f"{response}")
+      for chunk in response:
+           print(chunk.content, end ="", flush = True)
+           st.write(f"{chunk.content}")
    else:
       st.error("Please provide all the required information.")
