@@ -19,7 +19,8 @@ if generate_button and openai_api_key.startswith('sk-'):
       prompt = (f"I am a {fitness_level.lower()} looking to achieve {goals} in {duration} weeks. "
                    f"Can you provide me with a detailed weekly fitness training plan?")
       st.write(prompt)
-      response = llm.invoke(prompt)
+      response = llm.stream(prompt)
+      print(type(response))
       #content_without_timestamps = ''.join(filter(lambda x: not x.isdigit(), chunk.content))
       #concatenated_content += content_without_timestamps
       st.write(f"{chunk.content}")
