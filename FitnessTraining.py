@@ -19,7 +19,9 @@ if generate_button and openai_api_key.startswith('sk-'):
       prompt = (f"I am a {fitness_level.lower()} looking to achieve {goals} in {duration} weeks. "
                    f"Can you provide me with a detailed weekly fitness training plan?")
       st.write(prompt)
-      response = llm.stream(prompt)
+      prompt=ChatPromptTemplate.from_template("Sumarize {topic} in 4 lines")
+      chain=prompt|llm
+      response=chain.invoke({"topic":{file_contents}})
       for chunk in response:
            print(chunk.content, end ="", flush = True)
            st.write(f"{chunk.content}")
