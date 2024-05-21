@@ -18,7 +18,7 @@ if generate_button and openai_api_key.startswith('sk-'):
       llm=ChatOpenAI(api_key=openai_api_key,temperature=0.8,model_name="gpt-3.5-turbo")
       prompt = (f"I am a {fitness_level.lower()} looking to achieve {goals} in {duration} weeks. ")
       st.write(prompt)
-      prompt=ChatPromptTemplate.from_template("f"Can you provide me with a detailed weekly fitness training plan?"")
+      prompt=ChatPromptTemplate.from_template("{topic} Can you provide me with a detailed weekly fitness training plan?")
       chain=prompt|llm
       response=chain.invoke({"topic":{prompt}})
       print(response)
