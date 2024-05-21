@@ -16,14 +16,12 @@ if not openai_api_key.startswith('sk-'):
 if generate_button and openai_api_key.startswith('sk-'):
    if goals and fitness_level and duration:
       llm=ChatOpenAI(api_key=openai_api_key,temperature=0.8,model_name="gpt-3.5-turbo")
-      prompt = (f"I am a {fitness_level.lower()} looking to achieve {goals} in {duration} weeks. "
-                   f"Can you provide me with a detailed weekly fitness training plan?")
+      prompt = (f"I am a {fitness_level.lower()} looking to achieve {goals} in {duration} weeks. ")
       st.write(prompt)
-      prompt=ChatPromptTemplate.from_template("Sumarize {topic} in 4 lines")
+      prompt=ChatPromptTemplate.from_template("f"Can you provide me with a detailed weekly fitness training plan?"")
       chain=prompt|llm
-      response=chain.invoke({"topic":{file_contents}})
-      for chunk in response:
-           print(chunk.content, end ="", flush = True)
-           st.write(f"{chunk.content}")
+      response=chain.invoke({"topic":{prompt}})
+      print(response)
+      st.write(response.content)
    else:
       st.error("Please provide all the required information.")
